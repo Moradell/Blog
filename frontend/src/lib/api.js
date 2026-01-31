@@ -5,12 +5,13 @@ const BASE_URL = 'https://api.abdulin.dev/api';
  * @param {RequestInit} [options]
  */
 async function request(path, options = {}) {
+	const { headers, ...rest } = options;
 	const res = await fetch(`${BASE_URL}${path}`, {
+		...rest,
 		headers: {
 			'Content-Type': 'application/json',
-			...options.headers
-		},
-		...options
+			...headers
+		}
 	});
 
 	if (res.status === 204) return null;
