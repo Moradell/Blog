@@ -8,18 +8,11 @@ node_modules/
 build/
 dist/
 
-# Python
-__pycache__/
-*.pyc
-*.pyo
-.venv/
-venv/
+# Generated content assets
+frontend/static/content/
 
 # Environment
 .env
-
-# Database
-*.db
 
 # OS
 .DS_Store

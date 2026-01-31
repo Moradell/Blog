@@ -10,7 +10,6 @@
 	<header>
 		<nav>
 			<a href="/" class="logo">Blog</a>
-			<a href="/admin">Admin</a>
 		</nav>
 	</header>
 

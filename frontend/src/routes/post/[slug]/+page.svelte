@@ -1,25 +1,5 @@
 <script>
-	import { page } from '$app/stores';
-	import { getPost } from '$lib/api.js';
-
-	/** @type {any} */
-	let post = $state(null);
-	let loading = $state(true);
-	let error = $state('');
-
-	$effect(() => {
-		const slug = $page.params.slug;
-		getPost(slug)
-			.then((data) => {
-				post = data;
-			})
-			.catch((err) => {
-				error = err.message;
-			})
-			.finally(() => {
-				loading = false;
-			});
-	});
+	let { data } = $props();
 
 	/** @param {string} dateStr */
 	function formatDate(dateStr) {
@@ -32,38 +12,20 @@
 </script>
 
 <svelte:head>
-	{#if post}
-		<title>{post.title} - Blog</title>
-	{/if}
+	<title>{data.post.title} - Blog</title>
 </svelte:head>
 
-{#if loading}
-	<p class="status">Loading...</p>
-{:else if error}
-	<p class="status error">{error}</p>
-{:else if post}
-	<article>
-		<header>
-			<time datetime={post.created_at}>{formatDate(post.created_at)}</time>
-			<h1>{post.title}</h1>
-		</header>
-		<div class="markdown-body">
-			{@html post.html_content}
-		</div>
-	</article>
-{/if}
+<article>
+	<header>
+		<time datetime={data.post.created_at}>{formatDate(data.post.created_at)}</time>
+		<h1>{data.post.title}</h1>
+	</header>
+	<div class="markdown-body">
+		{@html data.post.html_content}
+	</div>
+</article>
 
 <style lang="scss">
-	.status {
-		text-align: center;
-		color: #6b7280;
-		padding: 3rem 0;
-	}
-
-	.error {
-		color: #dc2626;
-	}
-
 	article header {
 		margin-bottom: 2rem;
 		padding-bottom: 1.5rem;
