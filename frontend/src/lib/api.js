@@ -1,4 +1,4 @@
-const BASE_URL = 'http://localhost:8000/api';
+const BASE_URL = 'https://api.abdulin.dev/api';
 
 /**
  * @param {string} path
