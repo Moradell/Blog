@@ -112,8 +112,10 @@
             font-style: italic;
         }
 
-        img {
+        :global(img) {
             max-width: 100%;
+            height: auto;
+            display: block;
             border-radius: 4px;
         }
 
