@@ -1,5 +1,6 @@
 <script>
     let { children } = $props();
+    import Header from "$lib/components/Header.svelte";
 </script>
 
 <svelte:head>
@@ -8,9 +9,7 @@
 
 <div class="site">
     <header>
-        <nav>
-            <a href="/" class="logo">Blog1</a>
-        </nav>
+        <Header />
     </header>
 
     <main>
@@ -129,32 +128,6 @@
 
     header {
         border-bottom: 1px solid #e5e7eb;
-    }
-
-    nav {
-        max-width: 720px;
-        margin: 0 auto;
-        padding: 1rem 1.5rem;
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-    }
-
-    .logo {
-        font-size: 1.2rem;
-        font-weight: 700;
-        text-decoration: none;
-        color: #111827;
-    }
-
-    nav a:not(.logo) {
-        text-decoration: none;
-        font-size: 0.9rem;
-        color: #6b7280;
-
-        &:hover {
-            color: #111827;
-        }
     }
 
     main {
