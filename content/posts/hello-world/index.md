@@ -11,6 +11,6 @@ created_at: "2026-02-01"
 Просто текст рыба для теста блога
 
 ## Проверка картинок
-![Screenshot](./AYA.jpg)
+![AYA](/posts/hello-world/AYA.jpg)
 
-![Screenshot](./AAA.jpg)
+![AAA](/posts/hello-world/AAA.jpg)

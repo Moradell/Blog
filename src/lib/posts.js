@@ -14,9 +14,7 @@ export function getPost(slug) {
   const raw = fs.readFileSync(filePath, "utf-8");
   const { data, content } = matter(raw);
 
-  const html_content = marked
-    .parse(content, { async: false })
-    .replace(/src="\.\/([^"]+)"/g, `src="/content/${slug}/$1"`);
+  const html_content = marked.parse(content, { async: false });
 
   return {
     slug,
