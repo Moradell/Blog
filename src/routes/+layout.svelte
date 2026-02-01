@@ -4,24 +4,40 @@
 </script>
 
 <svelte:head>
-    <title>Alex's Blog about everything</title>
+    <title>Блог</title>
 </svelte:head>
 
 <div class="site">
-    <header>
-        <Header />
-    </header>
+    <Header />
 
-    <main>
-        {@render children()}
-    </main>
+    <div class="content">
+        <div class="container">
+            <main>
+                {@render children()}
+            </main>
+        </div>
+    </div>
 
     <footer>
-        <p>&copy; {new Date().getFullYear()} Blog</p>
+        <div class="container">
+            <p>&copy; {new Date().getFullYear()} Блог</p>
+        </div>
     </footer>
 </div>
 
 <style lang="scss">
+    :global(:root) {
+        --bg-primary: #fafaf8;
+        --bg-secondary: #ffffff;
+        --text-primary: #1a1a1a;
+        --text-secondary: #666666;
+        --text-tertiary: #999999;
+        --accent: #2d5a4a;
+        --accent-light: #e8f0ed;
+        --border: #e8e8e6;
+        --hover: #f5f5f3;
+    }
+
     :global(*) {
         margin: 0;
         padding: 0;
@@ -29,15 +45,15 @@
     }
 
     :global(body) {
-        font-family:
-            -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-        color: #111827;
-        background: #fff;
+        font-family: "Work Sans", sans-serif;
+        background: var(--bg-primary);
+        color: var(--text-primary);
+        line-height: 1.6;
         -webkit-font-smoothing: antialiased;
     }
 
     :global(a) {
-        color: #6366f1;
+        color: var(--accent);
     }
 
     /* Markdown content styles */
@@ -46,13 +62,17 @@
         h2,
         h3,
         h4 {
+            font-family: "Cormorant Garamond", serif;
+            font-weight: 500;
             margin-top: 1.5em;
             margin-bottom: 0.5em;
-            font-weight: 600;
+            letter-spacing: -0.01em;
         }
 
         p {
             margin-bottom: 1em;
+            font-weight: 300;
+            line-height: 1.7;
         }
 
         ul,
@@ -65,7 +85,7 @@
             background: #1e1e2e;
             color: #cdd6f4;
             padding: 1rem;
-            border-radius: 6px;
+            border-radius: 4px;
             overflow-x: auto;
             margin-bottom: 1em;
             font-size: 0.875rem;
@@ -78,21 +98,23 @@
         }
 
         :not(pre) > code {
-            background: #f3f4f6;
+            background: var(--accent-light);
+            color: var(--accent);
             padding: 0.15em 0.4em;
             border-radius: 3px;
         }
 
         blockquote {
-            border-left: 3px solid #d1d5db;
+            border-left: 3px solid var(--accent);
             padding-left: 1rem;
-            color: #6b7280;
+            color: var(--text-secondary);
             margin-bottom: 1em;
+            font-style: italic;
         }
 
         img {
             max-width: 100%;
-            border-radius: 6px;
+            border-radius: 4px;
         }
 
         table {
@@ -102,20 +124,20 @@
 
             th,
             td {
-                border: 1px solid #e5e7eb;
+                border: 1px solid var(--border);
                 padding: 0.5rem 0.75rem;
                 text-align: left;
             }
 
             th {
-                background: #f9fafb;
-                font-weight: 600;
+                background: var(--hover);
+                font-weight: 500;
             }
         }
 
         hr {
             border: none;
-            border-top: 1px solid #e5e7eb;
+            border-top: 1px solid var(--border);
             margin: 2em 0;
         }
     }
@@ -126,23 +148,36 @@
         flex-direction: column;
     }
 
-    header {
-        border-bottom: 1px solid #e5e7eb;
+    .container {
+        max-width: 780px;
+        width: 100%;
+        margin: 0 auto;
+        padding: 0 24px;
+    }
+
+    .content {
+        flex: 1;
     }
 
     main {
-        flex: 1;
-        max-width: 720px;
-        width: 100%;
-        margin: 0 auto;
-        padding: 2rem 1.5rem;
+        padding: 0 0 80px;
     }
 
     footer {
-        border-top: 1px solid #e5e7eb;
         text-align: center;
-        padding: 1.5rem;
+        padding: 1.5rem 0;
         font-size: 0.85rem;
-        color: #9ca3af;
+        color: var(--text-tertiary);
+
+        :global(.container) {
+            border-top: 1px solid var(--border);
+            padding-top: 1.5rem;
+        }
+    }
+
+    @media (max-width: 600px) {
+        .container {
+            padding: 0 20px;
+        }
     }
 </style>

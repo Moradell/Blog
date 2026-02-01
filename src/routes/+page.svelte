@@ -1,27 +1,50 @@
 <script>
     import PostCard from "$lib/components/PostCard.svelte";
+    import TagFilter from "$lib/components/TagFilter.svelte";
 
     let { data } = $props();
+
+    let activeTag = $state("all");
+
+    const allTags = $derived(
+        [...new Set(data.posts.flatMap((p) => p.tags))].sort(),
+    );
+
+    const filteredPosts = $derived(
+        activeTag === "all"
+            ? data.posts
+            : data.posts.filter((p) => p.tags.includes(activeTag)),
+    );
 </script>
 
-<section>
-    {#if data.posts.length === 0}
-        <p class="status">No posts yet.</p>
+{#if allTags.length > 0}
+    <TagFilter
+        tags={allTags}
+        active={activeTag}
+        onselect={(tag) => (activeTag = tag)}
+    />
+{/if}
+
+<section class="articles">
+    {#if filteredPosts.length === 0}
+        <p class="no-articles">Статей с выбранным тегом не найдено</p>
     {:else}
-        {#each data.posts as post (post.slug)}
+        {#each filteredPosts as post (post.slug)}
             <PostCard {post} />
         {/each}
     {/if}
 </section>
 
 <style lang="scss">
-    section {
-        padding-top: 1rem;
+    .articles {
+        /* padding-top: 32px; */
     }
 
-    .status {
+    .no-articles {
         text-align: center;
-        color: #6b7280;
-        padding: 3rem 0;
+        padding: 60px 20px;
+        color: var(--text-tertiary);
+        font-size: 15px;
+        font-style: italic;
     }
 </style>

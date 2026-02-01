@@ -10,11 +10,13 @@ const POSTS_DIR = path.resolve("content/posts");
  * @returns {{ slug: string, title: string, excerpt: string, created_at: string, published: boolean, html_content: string }}
  */
 export function getPost(slug) {
-  const filePath = path.join(POSTS_DIR, slug, "index.md");
+  const filePath = path.join(POSTS_DIR, `${slug}.md`);
   const raw = fs.readFileSync(filePath, "utf-8");
   const { data, content } = matter(raw);
 
   const html_content = marked.parse(content, { async: false });
+  const word_count = content.trim().split(/\s+/).length;
+  const reading_time = Math.max(1, Math.round(word_count / 200));
 
   return {
     slug,
@@ -22,6 +24,8 @@ export function getPost(slug) {
     excerpt: data.excerpt ?? "",
     created_at: data.created_at,
     published: data.published !== false,
+    tags: data.tags ?? [],
+    reading_time,
     html_content,
   };
 }
@@ -42,11 +46,13 @@ export function getAllPosts() {
       (a, b) =>
         new Date(b.created_at).getTime() - new Date(a.created_at).getTime(),
     )
-    .map(({ slug, title, excerpt, created_at }) => ({
+    .map(({ slug, title, excerpt, created_at, reading_time, tags }) => ({
       slug,
       title,
       excerpt,
       created_at,
+      reading_time,
+      tags,
     }));
 }
 
@@ -54,8 +60,8 @@ export function getAllPosts() {
 export function getAllSlugs() {
   if (!fs.existsSync(POSTS_DIR)) return [];
 
-  return fs.readdirSync(POSTS_DIR).filter((name) => {
-    const indexPath = path.join(POSTS_DIR, name, "index.md");
-    return fs.existsSync(indexPath);
-  });
+  return fs
+    .readdirSync(POSTS_DIR)
+    .filter((name) => name.endsWith(".md"))
+    .map((name) => name.replace(/\.md$/, ""));
 }
