@@ -1,5 +1,5 @@
 ---
-title: "Первый пост"
+title: "Первый пост1"
 excerpt: "Мой первый пост в блоге"
 published: true
 created_at: "2026-02-01"
