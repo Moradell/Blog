@@ -1,6 +1,7 @@
 <script>
     let { children } = $props();
     import Header from "$lib/components/Header.svelte";
+    import "../markdown.css";
 </script>
 
 <svelte:head>
@@ -54,94 +55,6 @@
 
     :global(a) {
         color: var(--accent);
-    }
-
-    /* Markdown content styles */
-    :global(.markdown-body) {
-        h1,
-        h2,
-        h3,
-        h4 {
-            font-family: "Cormorant Garamond", serif;
-            font-weight: 500;
-            margin-top: 1.5em;
-            margin-bottom: 0.5em;
-            letter-spacing: -0.01em;
-        }
-
-        p {
-            margin-bottom: 1em;
-            font-weight: 300;
-            line-height: 1.7;
-        }
-
-        ul,
-        ol {
-            margin-bottom: 1em;
-            padding-left: 1.5em;
-        }
-
-        pre {
-            background: #1e1e2e;
-            color: #cdd6f4;
-            padding: 1rem;
-            border-radius: 4px;
-            overflow-x: auto;
-            margin-bottom: 1em;
-            font-size: 0.875rem;
-            line-height: 1.6;
-        }
-
-        code {
-            font-family: "SF Mono", "Fira Code", monospace;
-            font-size: 0.9em;
-        }
-
-        :not(pre) > code {
-            background: var(--accent-light);
-            color: var(--accent);
-            padding: 0.15em 0.4em;
-            border-radius: 3px;
-        }
-
-        blockquote {
-            border-left: 3px solid var(--accent);
-            padding-left: 1rem;
-            color: var(--text-secondary);
-            margin-bottom: 1em;
-            font-style: italic;
-        }
-
-        :global(img) {
-            max-width: 100%;
-            height: auto;
-            display: block;
-            border-radius: 4px;
-        }
-
-        table {
-            width: 100%;
-            border-collapse: collapse;
-            margin-bottom: 1em;
-
-            th,
-            td {
-                border: 1px solid var(--border);
-                padding: 0.5rem 0.75rem;
-                text-align: left;
-            }
-
-            th {
-                background: var(--hover);
-                font-weight: 500;
-            }
-        }
-
-        hr {
-            border: none;
-            border-top: 1px solid var(--border);
-            margin: 2em 0;
-        }
     }
 
     .site {
